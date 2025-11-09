@@ -6,6 +6,8 @@
 
 # Evernight Vista OOBE
 
+© 2026 Evernight Vista Team
+
 The Out-of-the-box Experience (OOBE) experience that greets a user after system
 installation or when starting up a new computer. Guides the user in creating the
 system's first user account and configuring initial settings.It's based on plasma-setup.
@@ -27,7 +29,7 @@ system's first user account and configuring initial settings.It's based on plasm
 - Clone the repository:
 
 ```bash
-git clone https://invent.kde.org/evernightfedora/evernight-vista-oobe.git
+git clone https://github.com/EvernightFedora/evernight-vista-oobe.git
 ```
 
 - Build and install:
@@ -52,7 +54,12 @@ sudo systemctl enable plasma-setup.service
 
 - Reboot:
 
-With the systemd service enabled, reboot your system and the initial setup will run automatically.
+With the systemd service enabled, reboot your system and the OOBE Components will run automatically.
+
+- Contact:
+
+Bilibili:长夜月玩Fedora
+Mail:13278297951@sina.cn
 
 -----
 
