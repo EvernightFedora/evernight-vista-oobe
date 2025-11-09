@@ -67,7 +67,7 @@ With the systemd service enabled, reboot your system and the OOBE Components wil
 
 - Contact:
 
-Bilibili:长夜月玩Fedora
+Bilibili/RedNote(Xiaohongshu):长夜月玩Fedora
 Mail:13278297951@sina.cn
 
 -----
