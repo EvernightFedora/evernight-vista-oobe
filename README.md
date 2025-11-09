@@ -24,7 +24,16 @@ system's first user account and configuring initial settings.It's based on plasm
 
 ## Getting Started
 
+- Binary (Fedora 43):
+```bash
+sudo dnf copr enable march7thdev/Evernight_Vista_Operating_System -y
+```
 
+```bash
+sudo dnf install evernight-vista-oobe
+```
+
+Caution:Please make sure installed evernight-vista-wallpaper and evernight-vista-themeui!
 
 - Clone the repository:
 
