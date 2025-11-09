@@ -4,11 +4,11 @@
 -->
 
 
-# Plasma Setup
+# Evernight Vista OOBE
 
-The Out-of-the-box (OOTB) experience that greets a user after system
+The Out-of-the-box Experience (OOBE) experience that greets a user after system
 installation or when starting up a new computer. Guides the user in creating the
-system's first user account and configuring initial settings.
+system's first user account and configuring initial settings.It's based on plasma-setup.
 
 
 ## Features
@@ -22,13 +22,12 @@ system's first user account and configuring initial settings.
 
 ## Getting Started
 
-> [!caution]
-> It is not recommended to install this on your system — you should use a virtual machine instead. Installing this on real hardware will leave behind files not trivially uninstallable and could leave your system in a non-function state.
+
 
 - Clone the repository:
 
 ```bash
-git clone https://invent.kde.org/plasma/plasma-setup.git
+git clone https://invent.kde.org/evernightfedora/evernight-vista-oobe.git
 ```
 
 - Build and install:
