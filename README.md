@@ -7,11 +7,13 @@
 # Evernight Vista OOBE
 
 © 2026 Evernight Vista Team
+Based on Plasma Setup (C) KDE Community (https://kde.org)
 
 The Out-of-the-box Experience (OOBE) experience that greets a user after system
 installation or when starting up a new computer. Guides the user in creating the
 system's first user account and configuring initial settings.It's based on plasma-setup.
 
+Original Repo:https://github.com/KDE/plasma-setup
 
 ## Features
 
