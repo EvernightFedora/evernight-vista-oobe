@@ -7,6 +7,7 @@
 # Evernight Vista OOBE
 
 © 2026 Evernight Vista Team
+
 Based on Plasma Setup (C) KDE Community (https://kde.org)
 
 The Out-of-the-box Experience (OOBE) experience that greets a user after system
