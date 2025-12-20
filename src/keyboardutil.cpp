@@ -18,38 +18,33 @@
 #include <QTextStream>
 
 KeyboardUtil::KeyboardUtil(QObject *parent)
-: QObject(parent)
+    : QObject(parent)
 {
 }
 
 void KeyboardUtil::setLayout(const QString &layout, const QString &variant)
 {
-    // 强制使用cn布局，忽略传入的参数
-    QString forcedLayout = QStringLiteral("cn");
-    if (m_layout.name == forcedLayout && m_layout.variant == variant) {
+    if (m_layout.name == layout && m_layout.variant == variant) {
         return;
     }
 
-    m_layout.name = forcedLayout;
+    m_layout.name = layout;
     m_layout.variant = variant;
     applyLayout();
 }
 
 void KeyboardUtil::applyLayout()
 {
-    // 强制确保布局为cn
-    m_layout.name = QStringLiteral("cn");
-
     if (m_layout.name.isEmpty()) {
         qCWarning(PlasmaSetup) << "No keyboard layout set.";
         return;
     }
 
-    #ifdef QT_DEBUG
+#ifdef QT_DEBUG
     qCInfo(PlasmaSetup) << "Skipping actual layout application in debug mode. Would have applied layout:" << m_layout.name
-    << "with variant:" << m_layout.variant;
+                        << "with variant:" << m_layout.variant;
     return;
-    #endif
+#endif
 
     qCInfo(PlasmaSetup) << "Applying keyboard layout:" << m_layout.name << "with variant:" << m_layout.variant;
 
@@ -61,8 +56,9 @@ void KeyboardUtil::applyLayoutForCurrentUser()
 {
     auto config = new KConfig(QStringLiteral("kxkbrc"), KConfig::NoGlobals);
     KConfigGroup group = config->group(QStringLiteral("Layout"));
-    // 强制写入cn布局
-    group.writeEntry(QStringLiteral("LayoutList"), QStringLiteral("cn"), KConfig::Notify);
+    group.writeEntry(QStringLiteral("DisplayNames"), "", KConfig::Notify);
+    group.writeEntry(QStringLiteral("LayoutList"), m_layout.name, KConfig::Notify);
+    group.writeEntry(QStringLiteral("VariantList"), m_layout.variant, KConfig::Notify);
     config->sync();
     delete config;
 }
@@ -73,28 +69,27 @@ void KeyboardUtil::applyLayoutAsSystemDefault()
     const QString locale1Path = QStringLiteral("/org/freedesktop/locale1");
 
     QDBusMessage message = QDBusMessage::createMethodCall( //
-    locale1Service,
-    locale1Path,
-    QStringLiteral("org.freedesktop.locale1"),
-                                                           QStringLiteral("SetX11Keyboard") //
+        locale1Service,
+        locale1Path,
+        QStringLiteral("org.freedesktop.locale1"),
+        QStringLiteral("SetX11Keyboard") //
     );
 
-    // 强制使用cn布局
-    const QString layout = QStringLiteral("cn");
+    // Default model is hardcoded, since we don't have a way to detect the actual model for now.
     const QString model = QStringLiteral("pc105");
     const QString options = QString();
+    // Convert option allows the layout to be applied everywhere with a single command.
     const bool convert = true;
     const bool interactive = false;
 
-    // 始终使用强制的cn布局，忽略m_layout.name
-    message << layout << model << m_layout.variant << options << convert << interactive;
+    message << m_layout.name << model << m_layout.variant << options << convert << interactive;
 
     QDBusMessage resultMessage = QDBusConnection::systemBus().call(message);
 
     if (resultMessage.type() == QDBusMessage::ErrorMessage) {
         qCWarning(PlasmaSetup) << "Failed to set system default keyboard layout:" << resultMessage.errorMessage();
     } else {
-        qCInfo(PlasmaSetup) << "Successfully set system default keyboard layout to cn.";
+        qCInfo(PlasmaSetup) << "Successfully set system default keyboard layout.";
     }
 }
 
