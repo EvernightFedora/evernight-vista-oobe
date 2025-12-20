@@ -23,18 +23,11 @@ PrepareUtil::PrepareUtil(QObject *parent)
 
         int scaling = 100;
 
-        if (!m_config) {
-            m_scaling = scaling;
-            Q_EMIT scalingChanged();
-            return;
-        }
-
         // to determine the scaling value:
         // try to take the primary display's scaling, otherwise use the scaling of any of the displays
         for (const KScreen::OutputPtr &output : m_config->outputs()) {
             scaling = output->scale() * 100;
-            bool isPrimaryDisplay = output->priority() == 0;
-            if (isPrimaryDisplay) {
+            if (output->isPrimary()) {
                 break;
             }
         }
@@ -44,7 +37,7 @@ PrepareUtil::PrepareUtil(QObject *parent)
     });
 
     // set property initially
-    m_usingDarkTheme = m_colorsSettings->colorScheme() == u"EvernightDark"_s;
+    m_usingDarkTheme = m_colorsSettings->colorScheme() == u"BreezeDark"_s;
 }
 
 int PrepareUtil::scaling() const
@@ -64,8 +57,7 @@ void PrepareUtil::setScaling(int scaling)
     for (KScreen::OutputPtr output : outputs) {
         // TODO: Find the display the app is on and only set the scaling for that display instead.
         // Setting for all displays is not ideal since they can have different densities.
-        bool isPrimaryDisplay = output->priority() == 0;
-        if (!isPrimaryDisplay) {
+        if (!output->isPrimary()) {
             continue;
         }
         output->setScale(scalingNum);

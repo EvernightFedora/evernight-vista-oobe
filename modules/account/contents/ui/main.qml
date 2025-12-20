@@ -16,8 +16,6 @@ import org.kde.plasmasetup.components as PlasmaSetupComponents
 PlasmaSetupComponents.SetupModule {
     id: root
 
-    available: !AccountController.hasExistingUsers
-
     /*!
     Whether the entered username is valid.
     */

@@ -26,44 +26,42 @@ PlasmaSetupComponents.SetupModule {
             Layout.alignment: Qt.AlignCenter
             spacing: Kirigami.Units.smallSpacing
 
-            // TODO: Fix scaling support as seen here: https://invent.kde.org/plasma/plasma-setup/-/merge_requests/56
+            Label {
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.gridUnit
+                Layout.bottomMargin: Kirigami.Units.gridUnit
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
 
-            // Label {
-            // Layout.leftMargin: Kirigami.Units.gridUnit
-            // Layout.rightMargin: Kirigami.Units.gridUnit
-            // Layout.bottomMargin: Kirigami.Units.gridUnit
-            // Layout.alignment: Qt.AlignTop
-            // Layout.fillWidth: true
+                wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
+                text: i18n("Adjust the size of elements on the screen.")
+            }
 
-            // wrapMode: Text.Wrap
-            // horizontalAlignment: Text.AlignHCenter
-            // text: i18n("Adjust the size of elements on the screen.")
-            // }
+            FormCard.FormCard {
+                id: scalingCard
+                maximumWidth: root.cardWidth
 
-            // FormCard.FormCard {
-            // id: scalingCard
-            // maximumWidth: root.cardWidth
+                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-            // Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                FormCard.FormComboBoxDelegate {
+                    id: displayScaling
+                    text: i18n("Display Scaling")
+                    displayMode: FormCard.FormComboBoxDelegate.Dialog
+                    model: Prepare.PrepareUtil.scalingOptions
 
-            // FormCard.FormComboBoxDelegate {
-            // id: displayScaling
-            // text: i18n("Display Scaling")
-            // displayMode: FormCard.FormComboBoxDelegate.Dialog
-            // model: Prepare.PrepareUtil.scalingOptions
+                    Connections {
+                        target: Prepare.PrepareUtil
 
-            // Connections {
-            // target: Prepare.PrepareUtil
+                        function onScalingChanged(): void {
+                        displayScaling.currentIndex = Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
+                    }
+                    }
 
-            // function onScalingChanged(): void {
-            // displayScaling.currentIndex = Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
-            // }
-            // }
-
-            // // remove % suffix
-            // onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1))
-            // }
-            // }
+                        // remove % suffix
+                        onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1))
+                    }
+                }
 
                 FormCard.FormCard {
                     id: darkThemeCard
