@@ -1,0 +1,4 @@
+[Daemon]
+Autolock=false
+RequirePassword=false
+Timeout=0

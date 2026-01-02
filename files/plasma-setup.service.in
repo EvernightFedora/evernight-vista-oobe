@@ -1,0 +1,30 @@
+# -*- mode: ini -*-
+
+# SPDX-FileCopyrightText: 2025 Kristen McWilliam <kristen@kde.org>
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+# systemd service file for loading the Plasma Setup application
+#
+# This service instructs plasma-setup to run in first user mode,
+# which is used to set up the initial user account and perform first-run tasks.
+#
+# This service is intended to be enabled after the system installation if 
+# new user setup is desired, and will be disabled after the initial user is created.
+#
+# systemd/system/plasma-setup.service
+
+[Unit]
+Description=Plasma Setup - Out-of-Box / First-Run setup wizard
+After=systemd-user-sessions.service plymouth-quit.service systemd-logind.service
+Before=display-manager.service
+
+# Only run if the `plasma-setup-done` flag file does not exist.
+ConditionPathExists=!${KDE_INSTALL_FULL_SYSCONFDIR}/plasma-setup-done
+
+[Service]
+Type=oneshot
+ExecStart=${CMAKE_INSTALL_FULL_LIBEXECDIR}/plasma-setup-bootutil
+
+[Install]
+WantedBy=multi-user.target
