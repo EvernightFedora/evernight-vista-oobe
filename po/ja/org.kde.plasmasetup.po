@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-Language: ja-JP\n"
 "X-Crowdin-File: /kf6-trunk/messages/plasma-setup/org.kde.plasmasetup.pot\n"
 "X-Crowdin-File-ID: 58536\n"
 "X-Generator: Poedit 3.8\n"
@@ -312,3 +312,14 @@ msgstr "次へ"
 msgctxt "@action:button"
 msgid "Finish"
 msgstr "完了"
+
+#: modules/hostname/contents/ui/main.qml:86
+#, kde-format
+msgid "What should this device be called?"
+msgstr "この装置は何と呼ぶべきですか？"
+
+#: modules/hostname/contents/ui/main.qml:97
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Hostname"
+msgstr "ホスト名"

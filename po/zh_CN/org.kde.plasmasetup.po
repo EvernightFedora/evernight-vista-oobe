@@ -305,3 +305,14 @@ msgstr "下一步"
 msgctxt "@action:button"
 msgid "Finish"
 msgstr "完成"
+
+#: modules/hostname/contents/ui/main.qml:86
+#, kde-format
+msgid "What should this device be called?"
+msgstr "此设备应该叫什么？"
+
+#: modules/hostname/contents/ui/main.qml:97
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Hostname"
+msgstr "主机名"
