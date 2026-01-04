@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Evernight Vista OOBE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-16 06:52+0000\n"
-"PO-Revision-Date: 2026-01-02 11:44+0800\n"
+"PO-Revision-Date: 2026-01-04 20:04+0800\n"
 "Last-Translator: \n"
 "Language-Team: JP Language\n"
 "Language: ja\n"
@@ -240,8 +240,8 @@ msgstr "無効な入力です。"
 msgctxt "%1 is the distro name"
 msgid "Your device is now ready.<br /><br />Enjoy <b>%1</b>!"
 msgstr ""
-"お使いのデバイスの準備が整いました。<br /><br /><b>%1</b> オペレーティングシ"
-"ステムへようこそ！"
+"お使いのデバイスの準備が整いました。<br /><br />ようこそ <b>%1</b> オペレー"
+"ティングシステム！"
 
 #: src/initialstartutil.cpp:38
 #, kde-format
@@ -250,9 +250,9 @@ msgid ""
 "Your device is now ready.<br /><br />After clicking <b>Finish</b> you will "
 "be able to sign in to your new account.<br /><br />Enjoy <b>%1</b>!"
 msgstr ""
-"お使いのデバイスは準備完了です。<br /><br /><b>完了</b> をクリックすると、新"
-"しいアカウントにサインインできます。<br /><br /><b>%1</b> オペレーティングシ"
-"ステムへようこそ！"
+"お使いのデバイスは準備完了です。<br /><br />クリックした後 <b>完了</b> 新しい"
+"アカウントにサインインできるようになります。<br /><br />ようこそ<b>%1</b> オ"
+"ペレーティングシステム！"
 
 #: src/main.cpp:35 src/qml/Main.qml:14
 #, kde-format
