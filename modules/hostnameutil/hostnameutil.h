@@ -7,7 +7,7 @@
 #include "hostname1_interface.h"
 
 #include <QObject>
-#include <QQmlEngine>
+#include <qqmlintegration.h>
 
 /**
  * Handles the system hostname.

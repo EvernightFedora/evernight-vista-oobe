@@ -8,18 +8,12 @@
 
 #include <KLocalizedString>
 
-#include <QDBusConnection>
-#include <QDBusPendingCallWatcher>
-#include <QDBusPendingReply>
-#include <QRegularExpression>
-#include <QSysInfo>
-#include <QVariant>
-
 namespace
 {
 enum class HostnameValidationResult {
     Valid,
     Empty,
+    Disallowed,
     TooLong,
     LeadingDot,
     TrailingDot,
@@ -32,6 +26,18 @@ enum class HostnameValidationResult {
 const QRegularExpression VALID_HOSTNAME_REGEX(QStringLiteral("^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$"));
 constexpr int MAX_HOSTNAME_LENGTH = 253;
 constexpr int MAX_LABEL_LENGTH = 63;
+const QList<QString> DISALLOWED_HOSTNAMES = {QStringLiteral("localhost"), QStringLiteral("localhost.localdomain")};
+
+bool isDisallowedHostname(const QString &hostname)
+{
+    const QString trimmed = hostname.trimmed();
+    for (const QString &disallowed : DISALLOWED_HOSTNAMES) {
+        if (trimmed.compare(disallowed, Qt::CaseInsensitive) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 HostnameValidationResult validateHostname(const QString &hostname)
 {
@@ -39,6 +45,10 @@ HostnameValidationResult validateHostname(const QString &hostname)
 
     if (trimmed.isEmpty()) {
         return HostnameValidationResult::Empty;
+    }
+
+    if (isDisallowedHostname(trimmed)) {
+        return HostnameValidationResult::Disallowed;
     }
 
     if (trimmed.size() > MAX_HOSTNAME_LENGTH) {
@@ -82,6 +92,8 @@ QString hostnameValidationMessageForResult(HostnameValidationResult result)
         return QString();
     case HostnameValidationResult::Empty:
         return i18nc("@info", "Hostname cannot be empty.");
+    case HostnameValidationResult::Disallowed:
+        return i18nc("@info", "Hostname cannot be \"localhost\" or \"localhost.localdomain\".");
     case HostnameValidationResult::TooLong:
         return i18nc("@info", "Hostname is too long (maximum 253 characters).");
     case HostnameValidationResult::LeadingDot:
@@ -120,11 +132,15 @@ QString HostnameUtil::hostname() const
 bool HostnameUtil::hostnameIsDefault() const
 {
     if (m_hostname.startsWith(QStringLiteral("localhost"))) {
+        qCDebug(PlasmaSetupHostnameUtil) << "Hostname starts with 'localhost', considered default.";
         return true;
     }
 
     QString defaultHostname = m_dbusInterface->defaultHostname();
-    return m_hostname == defaultHostname;
+    bool currentHostnameIsDefault = m_hostname == defaultHostname;
+    qCDebug(PlasmaSetupHostnameUtil) << "Current hostname:" << m_hostname << "; Default hostname from hostnamed:" << defaultHostname
+                                     << "; Is default:" << currentHostnameIsDefault;
+    return currentHostnameIsDefault;
 }
 
 void HostnameUtil::setHostname(const QString &hostname)

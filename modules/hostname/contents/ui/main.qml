@@ -10,6 +10,7 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 
+import org.kde.plasmasetup
 import org.kde.plasmasetup.components as PlasmaSetupComponents
 
 import org.kde.plasmasetup.hostnameutil
@@ -43,6 +44,16 @@ PlasmaSetupComponents.SetupModule {
     * If empty, the hostname is valid.
     */
     property string debouncedHostnameMessage: ""
+
+    function onPageActivated() {
+        // Disallow these default hostnames, as they would break networking for
+        // user shares.
+        if (HostnameUtil.hostname === "localhost" || HostnameUtil.hostname === "localhost.localdomain") {
+            let username = AccountController.username;
+            let prefix = username.length > 0 ? username : "plasma";
+            hostnameField.text = prefix + "-pc";
+        }
+    }
 
     /**
     * Update the validation properties based on the current hostname field text.
