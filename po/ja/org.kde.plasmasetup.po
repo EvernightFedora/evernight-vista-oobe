@@ -243,7 +243,7 @@ msgstr ""
 "お使いのデバイスの準備が整いました。<br /><br />ようこそ <b>%1</b> オペレー"
 "ティングシステム！"
 
-#: src/initialstartutil.cpp:38
+#: modules/finished/contents/ui/main.qml:30
 #, kde-format
 msgctxt "%1 is the distro name"
 msgid ""

@@ -237,7 +237,7 @@ msgctxt "%1 is the distro name"
 msgid "Your device is now ready.<br /><br />Enjoy <b>%1</b>!"
 msgstr "您的设备已经准备就绪。<br /><br />欢迎使用 <b>%1</b> 操作系统！"
 
-#: src/initialstartutil.cpp:38
+#: modules/finished/contents/ui/main.qml:30
 #, kde-format
 msgctxt "%1 is the distro name"
 msgid ""
