@@ -15,7 +15,7 @@ install(
 
 install(
     FILES "plasma-setup-sysuser.conf"
-    DESTINATION  "lib/sysusers.d"
+    DESTINATION "lib/sysusers.d"
 )
 
 configure_file(plasma-setup-tmpfiles.conf.in plasma-setup-tmpfiles.conf)
@@ -31,17 +31,12 @@ install(
 )
 
 install(
-    FILES "powerdevilrc"
-    DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
-)
-
-install(
-    FILES "kscreenlockerrc"
-    DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
-)
-
-install(
     FILES "kglobalaccelrc"
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
+)
+
+install(
+    FILES "powerdevilrc"
     DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
 )
 
