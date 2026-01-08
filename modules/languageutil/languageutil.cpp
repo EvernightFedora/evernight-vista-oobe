@@ -113,9 +113,20 @@ void LanguageUtil::overrideInitialLanguageIfNeeded()
         return;
     }
 
-    qCWarning(PlasmaSetupLanguageUtil) << "Current language" << m_currentLanguage << "is not available. Defaulting to en_US.";
+    // If the current language has an underscore variant, grab the base language.
+    // e.g. "de_DE" becomes "de"
+    QString baseLanguage = m_currentLanguage.split(QStringLiteral("_")).first();
 
-    m_currentLanguage = QStringLiteral("en_US");
+    // The language list didn't contain the full locale, but maybe it has the base language.
+    if (m_availableLanguages.contains(baseLanguage)) {
+        qCInfo(PlasmaSetupLanguageUtil) << "Current language" << m_currentLanguage << "is not available. Overriding to base language" << baseLanguage << ".";
+        m_currentLanguage = baseLanguage;
+    } else {
+        // The base language is also not available, so we'll fall back to English.
+        qCWarning(PlasmaSetupLanguageUtil) << "Current language" << m_currentLanguage << "is not available. Defaulting to en_US.";
+        m_currentLanguage = QStringLiteral("en_US");
+    }
+
     applyLanguage();
 
     // Small delay because otherwise the QML side won't see the change and scroll to the new language.
