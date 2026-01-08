@@ -126,6 +126,15 @@ PlasmaSetupComponents.SetupModule {
                             scrollToCurrentLanguage();
                         }
                     }
+
+                    Connections {
+                        target: Language.LanguageUtil
+
+                        // Scroll to the correct language if an initial override was applied.
+                        function onInitialLanguageOverrideApplied() {
+                            languageListView.scrollToCurrentLanguage();
+                        }
+                    }
                 }
             }
         }

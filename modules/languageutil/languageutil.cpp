@@ -9,12 +9,15 @@
 #include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDBusReply>
+#include <QTimer>
 
 LanguageUtil::LanguageUtil(QObject *parent)
     : QObject(parent)
 {
     loadAvailableLanguages();
     m_currentLanguage = QLocale::system().name();
+    qCInfo(PlasmaSetupLanguageUtil) << "System language detected as:" << m_currentLanguage;
+    overrideInitialLanguageIfNeeded();
 }
 
 QStringList LanguageUtil::availableLanguages() const
@@ -101,6 +104,24 @@ void LanguageUtil::loadAvailableLanguages()
     m_availableLanguages.sort();
 
     Q_EMIT availableLanguagesChanged();
+}
+
+void LanguageUtil::overrideInitialLanguageIfNeeded()
+{
+    if (m_availableLanguages.contains(m_currentLanguage)) {
+        // Current language is available; no override needed.
+        return;
+    }
+
+    qCWarning(PlasmaSetupLanguageUtil) << "Current language" << m_currentLanguage << "is not available. Defaulting to en_US.";
+
+    m_currentLanguage = QStringLiteral("en_US");
+    applyLanguage();
+
+    // Small delay because otherwise the QML side won't see the change and scroll to the new language.
+    QTimer::singleShot(0, this, [this]() {
+        Q_EMIT initialLanguageOverrideApplied();
+    });
 }
 
 #include "moc_languageutil.cpp"
