@@ -75,7 +75,7 @@ void LanguageUtil::applyLanguageAsSystemDefault()
     );
 
     const QLocale locale = QLocale(m_currentLanguage);
-    const QString lang = QStringLiteral("LANG=") + locale.name() + QStringLiteral(".UTF-8"); // e.g. "LANG=zh_CN.UTF-8"
+    const QString lang = QStringLiteral("LANG=") + locale.name() + QStringLiteral(".UTF-8"); // e.g. "LANG=en_US.UTF-8"
     const bool interactive = false;
     message << QStringList{lang} << interactive;
 
@@ -97,8 +97,8 @@ void LanguageUtil::loadAvailableLanguages()
     m_availableLanguages = KLocalizedString::availableDomainTranslations("plasmashell").values();
 
     // Ensure we at least have English available
-    if (!m_availableLanguages.contains(QStringLiteral("zh_CN"))) {
-        m_availableLanguages.append(QStringLiteral("zh_CN"));
+    if (!m_availableLanguages.contains(QStringLiteral("en_US"))) {
+        m_availableLanguages.append(QStringLiteral("en_US"));
     }
 
     m_availableLanguages.sort();
@@ -113,9 +113,9 @@ void LanguageUtil::overrideInitialLanguageIfNeeded()
         return;
     }
 
-    qCWarning(PlasmaSetupLanguageUtil) << "Current language" << m_currentLanguage << "is not available. Defaulting to zh_CN.";
+    qCWarning(PlasmaSetupLanguageUtil) << "Current language" << m_currentLanguage << "is not available. Defaulting to en_US.";
 
-    m_currentLanguage = QStringLiteral("zh_CN");
+    m_currentLanguage = QStringLiteral("en_US");
     applyLanguage();
 
     // Small delay because otherwise the QML side won't see the change and scroll to the new language.
