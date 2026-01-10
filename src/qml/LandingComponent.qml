@@ -45,8 +45,8 @@ Item {
         source: {
             // default wallpaper background
             const imgFile = isLandscape ? '3840x2160.jxl' : '3840x2160.jxl';
-            const lightWallpaperFolder = 'wallpapers/Utopia/contents/images/';
-            const darkWallpaperFolder = 'wallpapers/Utopia/contents/images_dark/';
+            const lightWallpaperFolder = 'wallpapers/Nova/contents/images/';
+            const darkWallpaperFolder = 'wallpapers/Nova/contents/images_dark/';
 
             const wallpaperUrl = StandardPaths.locate(
                 StandardPaths.GenericDataLocation,
@@ -147,6 +147,17 @@ Item {
 
             level: 5
             color: "white"
+        }
+    }
+
+    SessionMenu {
+        id: sessionMenu
+
+        anchors {
+            bottom: parent.bottom
+            right: parent.right
+            rightMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.gridUnit
         }
     }
 }

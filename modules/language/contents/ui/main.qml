@@ -122,11 +122,9 @@ PlasmaSetupComponents.SetupModule {
 
                     Component.onCompleted: {
                         // Scroll to the current language when the view is ready
-                        Qt.callLater(() => {
-                            if (Language.LanguageUtil.currentLanguage) {
-                                scrollToCurrentLanguage();
-                            }
-                        });
+                        if (Language.LanguageUtil.currentLanguage) {
+                            scrollToCurrentLanguage();
+                        }
                     }
 
                     Connections {

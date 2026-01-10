@@ -41,6 +41,11 @@ install(
 )
 
 install(
+    FILES "kglobalshortcutsrc"
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
+)
+
+install(
     FILES plasmasetuprc
     DESTINATION ${KDE_INSTALL_FULL_CONFDIR}
 )
