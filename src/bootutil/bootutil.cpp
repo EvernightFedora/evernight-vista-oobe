@@ -1,28 +1,59 @@
 // SPDX-FileCopyrightText: 2025 Kristen McWilliam <kristen@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+#include "bootutil.h"
+
+#include "plasmasetup_bootutil_debug.h"
+
 #include <KConfig>
 #include <KConfigGroup>
 #include <KSharedConfig>
 
+#include <QDBusConnection>
+#include <QDBusReply>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
 #include <QTextStream>
 
-#include "bootutil.h"
-#include "plasmasetup_bootutil_debug.h"
+/**
+ * Path to the SDDM autologin configuration file.
+ */
+const QString SDDM_AUTOLOGIN_CONFIG_PATH = QStringLiteral("/etc/sddm.conf.d/99-plasma-setup.conf");
+
+/**
+ * Path to the PlasmaLogin autologin configuration file.
+ */
+const QString PLASMALOGIN_AUTOLOGIN_CONFIG_PATH = QStringLiteral("/etc/plasmalogin.conf.d/99-plasma-setup.conf");
+
+/**
+ * Path to the config to the active display manager (sddm or plasmalogin)
+ */
+static QString displayManagerConfigPath()
+{
+    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.systemd1"),
+                                                      QStringLiteral("/org/freedesktop/systemd1"),
+                                                      QStringLiteral("org.freedesktop.systemd1.Manager"),
+                                                      QStringLiteral("GetUnitFileState"));
+    msg << QStringLiteral("plasmalogin.service");
+
+    QDBusReply<QString> usingPlasmaLoginQuery = QDBusConnection::systemBus().call(msg);
+    if (usingPlasmaLoginQuery.value() == QLatin1String("enabled")) {
+        return PLASMALOGIN_AUTOLOGIN_CONFIG_PATH;
+    }
+    return SDDM_AUTOLOGIN_CONFIG_PATH;
+}
 
 BootUtil::BootUtil(QObject *parent)
     : QObject(parent)
 {
 }
 
-bool BootUtil::writeSDDMAutologin(const bool autoLogin)
+bool BootUtil::writeDisplayManagerAutologin(const bool autoLogin)
 {
     // Make sure the directory exists
-    const QString configFilePath = QStringLiteral("/etc/sddm.conf.d/99-plasma-setup.conf");
+    const QString configFilePath = displayManagerConfigPath();
     QFileInfo fileInfo(configFilePath);
     QDir dir = fileInfo.dir();
 
@@ -48,7 +79,7 @@ bool BootUtil::writeSDDMAutologin(const bool autoLogin)
         return false;
     }
 
-    // Write the autologin configuration for SDDM
+    // Write the autologin configuration
     QTextStream stream(&file);
     stream << "[Autologin]\n";
     stream << "User=plasma-setup\n";
@@ -57,7 +88,7 @@ bool BootUtil::writeSDDMAutologin(const bool autoLogin)
 
     removeEmptyAutologinEntry();
 
-    qCInfo(PlasmaSetupBootUtil) << "SDDM autologin configuration written successfully.";
+    qCInfo(PlasmaSetupBootUtil) << "Display Manager autologin configuration written successfully.";
     return true;
 }
 
