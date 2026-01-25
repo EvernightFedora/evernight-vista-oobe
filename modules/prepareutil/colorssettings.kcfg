@@ -23,7 +23,7 @@
     </entry>
     <entry name="accentColorFromWallpaper" key="accentColorFromWallpaper" type="Bool">
       <label>Whether accent color from wallpaper should be applied</label>
-      <default>true</default>
+      <default>false</default>
     </entry>
   </group>
 </kcfg>
