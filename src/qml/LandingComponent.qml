@@ -17,7 +17,7 @@ Item {
     readonly property real scaleLanding: 1.2
     readonly property real scaleSteps: 1
 
-    signal requestNextPage()
+    signal requestHillPage()
 
     function returnToLanding() {
         backgroundImage.scale = scaleLanding;
@@ -121,7 +121,7 @@ Item {
                 backgroundImage.scale = scaleSteps;
                 contentOpacityAnim.to = 0;
                 contentOpacityAnim.restart();
-                root.requestNextPage()
+                root.requestHillPage()
             }
         }
     }

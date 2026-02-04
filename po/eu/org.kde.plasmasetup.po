@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kiss\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-07 00:46+0000\n"
-"PO-Revision-Date: 2026-01-06 11:16+0100\n"
+"POT-Creation-Date: 2026-01-27 00:46+0000\n"
+"PO-Revision-Date: 2026-01-24 16:52+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -227,13 +227,10 @@ msgid "Hostname cannot be empty."
 msgstr "Ostalari-izena ezin da hutsik egon."
 
 #: modules/hostnameutil/hostnameutil.cpp:96
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Hostname cannot be \"localhost\" or \"localhost.localdomain\"."
+#, kde-format
 msgctxt "@info"
 msgid "Hostname cannot be “localhost” or “localhost.localdomain”."
-msgstr ""
-"Ostalari-izena ezin da izan \"localhost\" edo \"localhost.localdomain\"."
+msgstr "Ostalari-izena ezin da izan “localhost” edo “localhost.localdomain”."
 
 #: modules/hostnameutil/hostnameutil.cpp:98
 #, kde-format
@@ -286,12 +283,12 @@ msgstr ""
 msgid "Select your keyboard layout and language."
 msgstr "Hautatu zure teklatuaren antolaera eta hizkuntza."
 
-#: modules/language/contents/ui/main.qml:42
+#: modules/language/contents/ui/main.qml:41
 #, kde-format
 msgid "Please select your preferred language."
 msgstr "Mesedez, hautatu zure hizkuntza hobetsia."
 
-#: modules/language/contents/ui/main.qml:48
+#: modules/language/contents/ui/main.qml:47
 #, kde-format
 msgid "Search languages…"
 msgstr "Bilatu hizkuntzak…"
@@ -326,7 +323,7 @@ msgstr "Pasahitza:"
 msgid "Invalid input."
 msgstr "Sarrera baliogabea."
 
-#: src/main.cpp:35 src/qml/Main.qml:14
+#: src/main.cpp:35 src/qml/Main.qml:11
 #, kde-format
 msgid "Plasma Setup"
 msgstr "Plasma Ezarpena"

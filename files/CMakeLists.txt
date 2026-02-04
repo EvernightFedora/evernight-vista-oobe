@@ -36,11 +36,11 @@ install(
 )
 
 install(
-    FILES "powerdevilrc"
-    DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
+    FILES plasmasetuprc
+    DESTINATION ${KDE_INSTALL_FULL_CONFDIR}
 )
 
 install(
-    FILES plasmasetuprc
-    DESTINATION ${KDE_INSTALL_FULL_CONFDIR}
+    FILES "powerdevilrc"
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/plasma-setup
 )
