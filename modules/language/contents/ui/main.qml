@@ -8,7 +8,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.plasmasetup.languageutil as Language
 
 import org.kde.plasmasetup.components as PlasmaSetupComponents
@@ -39,13 +38,13 @@ PlasmaSetupComponents.SetupModule {
 
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
-                text: i18n("Please select your preferred language.") // qmllint disable unqualified
+                text: i18n("Please select your preferred language.")
             }
 
             Kirigami.SearchField {
                 id: searchField
                 Layout.fillWidth: true
-                placeholderText: i18n("Search languages…") // qmllint disable unqualified
+                placeholderText: i18n("Search languages…")
                 property string filterString: ""
 
                 onTextChanged: {
@@ -81,12 +80,13 @@ PlasmaSetupComponents.SetupModule {
 
                     currentIndex: -1 // Ensure focus is not on the listview
 
-                    delegate: FormCard.FormRadioDelegate {
+                    delegate: RadioDelegate {
                         required property string modelData
 
                         // Show and hide based on filter
                         readonly property bool matchesFilter: languageListView.matchesFilter(modelData)
                         height: matchesFilter ? implicitHeight : 0
+                        width: ListView.view.width
                         visible: matchesFilter
 
                         // Get language name from locale code (e.g., "en_US" -> "English (United States)")
