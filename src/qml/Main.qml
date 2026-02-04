@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.delegates as Delegates
 import org.kde.plasmasetup
 
 Kirigami.AbstractApplicationWindow {
@@ -17,7 +20,7 @@ Kirigami.AbstractApplicationWindow {
     // This is to prevent users from accidentally quitting the setup wizard
     // by pressing Ctrl+Q, which is the default shortcut for quitting Kirigami
     // applications.
-    quitAction.shortcut: ""
+    quitAction.enabled: false
 
     Wizard {
         anchors.fill: parent
