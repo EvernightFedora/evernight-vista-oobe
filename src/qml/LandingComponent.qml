@@ -45,8 +45,8 @@ Item {
         source: {
             // default wallpaper background
             const imgFile = isLandscape ? '3840x2160.jxl' : '3840x2160.jxl';
-            const lightWallpaperFolder = 'wallpapers/Hill/contents/images/';
-            const darkWallpaperFolder = 'wallpapers/Hill/contents/images_dark/';
+            const lightWallpaperFolder = 'wallpapers/Vista/contents/images/';
+            const darkWallpaperFolder = 'wallpapers/Vista/contents/images_dark/';
 
             const wallpaperUrl = StandardPaths.locate(
                 StandardPaths.GenericDataLocation,
