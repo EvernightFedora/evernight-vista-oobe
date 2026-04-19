@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.20)
 
-set(PROJECT_VERSION "6.5.90")
+set(PROJECT_VERSION "6.6.80")
 project(plasma-setup VERSION ${PROJECT_VERSION})
 
 set(QT_MIN_VERSION "6.10.0")
@@ -62,8 +62,6 @@ find_package(KF6Screen CONFIG REQUIRED)
 find_package(LibKWorkspace REQUIRED)
 find_package(PkgConfig REQUIRED)
 
-feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
-
 ################# build and install #################
 
 set(LOGIN_DEFS_PATH "/etc/login.defs" CACHE PATH "Path to the login.defs file")
@@ -88,7 +86,7 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
-feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 ki18n_install(po)
 

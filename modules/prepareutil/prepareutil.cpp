@@ -36,7 +36,7 @@ PrepareUtil::PrepareUtil(QObject *parent)
     });
 
     // set property initially
-    m_usingDarkTheme = m_colorsSettings->colorScheme() == u"BreezeDark"_s;
+    m_usingDarkTheme = m_colorsSettings->colorScheme() == u"EvernightDark"_s;
 }
 
 int PrepareUtil::scaling() const

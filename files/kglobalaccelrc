@@ -16,4 +16,3 @@ useAllowList=true
 [AllowedShortcuts]
 kaccess=Toggle Screen Reader On and Off
 kwin=MoveZoomDown,MoveZoomLeft,MoveZoomRight,MoveZoomUp,view_actual_size,view_zoom_in,view_zoom_out
-services=systemsettings.desktop

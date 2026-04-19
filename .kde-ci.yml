@@ -2,16 +2,17 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
- - 'on': ['@all']
-   'require':
-    'frameworks/extra-cmake-modules': '@latest-kf6'
-    'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kpackage': '@latest-kf6'
-    'frameworks/kconfig': '@latest-kf6'
-    'plasma/libkscreen': '@latest-kf6'
-    'plasma/plasma-desktop': '@latest-kf6'
-    'plasma/plasma-workspace': '@same'
+  - "on": ["@all"]
+    "require":
+      "frameworks/extra-cmake-modules": "@latest-kf6"
+      "frameworks/kcoreaddons": "@latest-kf6"
+      "frameworks/ki18n": "@latest-kf6"
+      "frameworks/kpackage": "@latest-kf6"
+      "frameworks/kconfig": "@latest-kf6"
+      "plasma/libkscreen": "@latest-kf6"
+      "plasma/plasma-desktop": "@latest-kf6"
+      "plasma/plasma-workspace": "@same"
 
 Options:
- run-qmllint: true
+  enable-lsan: true
+  run-qmllint: false # https://qt-project.atlassian.net/browse/QTBUG-145572
